@@ -25,14 +25,23 @@
 
 \* выброс, ошибка в данных.
 
+Запрос: [`queries/01_salary.sql`](queries/01_salary.sql)
+
 ### 2. Регионы и компании
 
 Москва — 1247 вакансий (~69%), Санкт-Петербург — 181, Екатеринбург — 51.
 Крупнейший работодатель — Сбер (243 вакансии), за ним WILDBERRIES (43) и Ozon (34).
 
+![Регионы](images/regions.png)
+![Работодатели](images/employers.png)
+
+Запрос: [`queries/02_regions_employers.sql`](queries/02_regions_employers.sql)
+
 ### 3. Занятость и график
 
 Полная занятость — 98% вакансий. Полный день — 80%, удалёнка — 17%.
+
+Запрос: [`queries/03_employment_schedule.sql`](queries/03_employment_schedule.sql)
 
 ### 4. Грейды (аналитики данных + системные, 692 вакансии)
 
@@ -43,10 +52,16 @@
 | Junior (без опыта) | 38 | 5,5% |
 | Senior (6+ лет) | 8 | 1,2% |
 
+![Грейды](images/grades.png)
+
+Запрос: [`queries/04_grades.sql`](queries/04_grades.sql) — доля считается оконной функцией `SUM(COUNT(id)) OVER ()`.
+
 ### 5. Работодатели
 
 Больше всего вакансий аналитиков у Сбера (134, полный день, средняя вилка ≈ 126–131 тыс. ₽).
 Большинство работодателей зарплату не указывают.
+
+Запрос: [`queries/05_employers_conditions.sql`](queries/05_employers_conditions.sql)
 
 ### 6. Навыки
 
@@ -54,8 +69,15 @@
   На Middle растёт роль A/B-тестов и ML.
 - **Soft skills:** документация (107), коммуникация (69), аналитическое мышление (38), проактивность (21).
 
-Навыки хранятся в четырёх столбцах, поэтому для подсчёта они объединены через `UNION ALL` в CTE —
-см. [`queries/06_hard_skills.sql`](queries/06_hard_skills.sql).
+![Hard skills](images/hard_skills.png)
+![Soft skills](images/soft_skills.png)
+
+Навыки хранятся в четырёх столбцах, поэтому для подсчёта они объединены через `UNION ALL` в CTE.
+Запросы: [`queries/06_1_hard_skills.sql`](queries/06_1_hard_skills.sql), [`queries/06_2_soft_skills.sql`](queries/06_2_soft_skills.sql).
+
+Запрос по hard skills в DBeaver:
+
+![DBeaver](images/dbeaver_skills_query.png)
 
 ## Особенности данных
 
@@ -65,5 +87,6 @@
 
 ## Файлы
 
-- `queries/` — SQL-запросы
+- `queries/` — SQL-запросы по каждой задаче
+- `images/` — графики и скриншот из DBeaver
 - `results/` — выгрузки результатов по каждой задаче (CSV)
